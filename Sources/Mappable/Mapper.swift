@@ -33,7 +33,7 @@ extension Mapper {
     ///
     public func from<T>(_ keyPath: String, keyPathIsNested: Bool = true) throws -> T {
         guard let value = self.value(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
-            throw ErrorType.valueNonExsited
+            throw ErrorType.valueNonExisted
         }
         if let v = value as? T {
             return v
@@ -43,7 +43,7 @@ extension Mapper {
 
     public func from<T: Mappable>(_ keyPath: String, keyPathIsNested: Bool = true) throws -> T {
         guard let value = self.value(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
-            throw ErrorType.valueNonExsited
+            throw ErrorType.valueNonExisted
         }
         let mapper = self.generateAnother(with: value)
         return try T.init(map:mapper)

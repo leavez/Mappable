@@ -11,7 +11,7 @@ import Foundation
 public enum ErrorType : Error {
 
     case JSONParseError(String)
-    case valueNonExsited
+    case valueNonExisted
     case cannotCast(Any?, String)
     case JSONStructureNotMatchDesired(Any?, String)
 
@@ -24,8 +24,8 @@ extension ErrorType: CustomStringConvertible {
         switch self {
         case .JSONParseError(let text):
             desc = "JSON parse error: " + text
-        case .valueNonExsited:
-            desc = "value doesn't exsit"
+        case .valueNonExisted:
+            desc = "value doesn't exist"
         case .cannotCast(let data, let type):
             desc = "Cannot cast to `\(type)` from `\(data ?? "nil")`"
         case .JSONStructureNotMatchDesired(let data, let type):
