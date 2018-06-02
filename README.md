@@ -9,7 +9,7 @@ struct Flight: Mappable {
     let number: String
     let time: Date
     
-    required init(map: Mapper) throws {
+    init(map: Mapper) throws {
         number = try map.from("flight_number")
         time   = try map.from("time")
     }
@@ -70,7 +70,7 @@ SwiftyJSON is not a JSON object convertor.  It's only a tool to deal with JSON 
 To support mapping, a type should implement `Mappable` protocol, which have only an initializer method:
 
 ```swift
-struct Country: Mappable {
+class Country: Mappable {
     let name: String
     let cities: [City]   // struct City: Mappable { ... }
     let atContinent: Continent // enum Continent: Mappable { ... }
@@ -103,13 +103,13 @@ struct User: Mappable {
     let ID: String
     let summary: String?
     
-    required init(map: Mapper) throws {
+    init(map: Mapper) throws {
         ID      = try map.from("id")
         summary = try map.from("summary")
     }
 }
-let json = """ {"id": "a123"} """
-let user = try! User(JSONString: json) // It won't crash.
+let json = ["id": "a123"]
+let user = try! User(JSONObject: json) // It won't crash.
 ```
 
 ### custom conversion
