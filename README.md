@@ -10,45 +10,45 @@ struct Flight: Mappable {
     let time: Date
     
     init(map: Mapper) throws {
-        number = try map.from("flight_number")
+        number = try map.from("id")
         time   = try map.from("time")
     }
 }
-// let f = Flight(JSONString: json)
+// Flight(JSONString: json)
 ```
 
 ## Features
 
-- JSON to objects with just mapping relationships
-- Optimized for Immutable and Optional
+- JSON to object by just specifying mapping relationships
+- Optimized for immutable and optional
 - Compatible types conversion : e.g. a Int property could be initialized with String value 
 - Nested key path support
 
 ## Why Another?
 
-Most JSON to model libraries cannot handle immutable property initialization well. They require to declare properties with `var` and nullable types, which breaks the sprint of Swift and leads to bad code. Mappable give a simple solution to this problems.
+Most JSON to model libraries cannot handle immutable property initialization well. They require to declare properties with `var` and nullable types, which break the sprint of Swift and lead to bad code. Mappable was born for solving this problem.
 
 ### compared with others
 
 #### Codable
 
-GOOD: Codable is native in Swift, need no mapping relationships,  and spport 2-direction conversion. ( support immutable too) 
+pros: Codable is native in Swift, need no mapping relationships, and spport 2-direction conversion. (support immutable too) 
 
-BAD: Doesn't support inherent class. 
+cons: Doesn't support inherent class. 
 
 #### HandyJSON
 
-GOOD: HandyJSON needs no mapping relationships, and support 2-direction conversion (JSON to model, model to JSON).
+pros: HandyJSON needs no mapping relationships, and support 2-direction conversion (JSON to model, model to JSON).
 
-BAD: Doesn't support immutable
+cons: Doesn't support immutable properies.
 
 #### ObjectMapper
 
 Mappable is highly inspired by ObjectMapper. You could tread Mappable as an improved version of `ImmutableMappable` in ObjectMapper.
 
-GOOD:  2-direction conversion
+pros:  2-direction conversion
 
-BAD: Doesn't support immutable very well: 1) cannot handle optional conveniently. 2)  doesn't support of compatible types conversion, which fall the whole object for every small mal-format in JSON. Also missing support for some combinations of types.
+cons: Doesn't support immutable very well: 1) cannot handle optional conveniently. 2)  doesn't support of compatible types conversion, which fall the whole object for every small mal-format in JSON. Also missing support for some combinations of types.
 
 #### SwiftyJSON
 
@@ -59,7 +59,6 @@ SwiftyJSON is not a JSON object convertor.  It's only a tool to deal with JSON 
 ### support types
 
 - Primitive types: `Int`, `Double`, `String`, `Bool`, `URL`, `Date` ...
-
 - Container types: `Array`, `Dictionary`, `Set`
 - Optional type
 - Enum, Struct, Object
