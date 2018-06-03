@@ -2,7 +2,7 @@
 
 [![Swift](https://img.shields.io/badge/swift-4.1-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
 
-Mappable is a lightweight, easy-to-use framework to convert JSON to model, specially optimized for immutable property initialization. 
+Mappable is a lightweight, easy-to-use framework to convert JSON to model, specially optimized for immutable property initialization.
 
 ```swift
 struct Flight: Mappable {
@@ -32,15 +32,15 @@ Most JSON to model libraries cannot handle immutable property initialization wel
 
 #### Codable
 
-pros: Codable is native in Swift, need no mapping relationships, and spport 2-direction conversion. (support immutable too) 
+pros: Codable is native in Swift, need no mapping relationships, and spport 2-direction conversion. (support immutable too)
 
-cons: Doesn't support inherent class. 
+cons: Doesn't support inherent class.
 
 #### HandyJSON
 
 pros: HandyJSON needs no mapping relationships, and support 2-direction conversion (JSON to model, model to JSON).
 
-cons: Doesn't support immutable properies.
+cons: Doesn't support immutable properties.
 
 #### ObjectMapper
 
@@ -52,17 +52,9 @@ cons: Doesn't support immutable very well: 1) cannot handle optional convenientl
 
 #### SwiftyJSON
 
-SwiftyJSON is not a JSON object convertor.  It's only a tool to deal with JSON data in Swift.
+SwiftyJSON is not a JSON object convertor. It's only a convenient tool to deal with JSON data.
 
 ## Usage
-
-### support types
-
-- Primitive types: `Int`, `Double`, `String`, `Bool`, `URL`, `Date` ...
-- Container types: `Array`, `Dictionary`, `Set`
-- Optional type
-- Enum, Struct, Object
-- Any combination of types above
 
 ### the basics
 
@@ -82,14 +74,23 @@ class Country: Mappable {
 }
 ```
 
-You just need write the mapping relationship: a key path to a property.  Although these lines are just normal assignment statements, types aren't needed to specified, so you could tread these lines as a form to represent mapping relationships. (You could read a line as "try (to) map from XXX".)
+You just need write the mapping relationship: a key path for a property. Although these lines are just normal assignment statements, types aren't needed to specified, so you could tread these lines as a special representation of mapping relationships. (You could read the line as "try (to) map (value) from XXX" 😆 )
 
 Then you could initialize a object like this:
 
 ```swift
-let c = try Country(JSON: jsonDict)
+// NOTE: these initializer throw errors, you should do error handling
+let c = try Country(JSON: jsonDict) 
 let d = try? Country(JSONString: jsonString)
 ```
+
+### support types
+
+- Primitive types: `Int`, `Double`, `String`, `Bool`, `URL`, `Date` ...
+- Container types: `Array`, `Dictionary`, `Set`
+- Optional type
+- Enum, Struct, Object
+- Any combination of the types above
 
 ### optional handling
 
@@ -111,10 +112,6 @@ let json = ["id": "a123"]
 let user = try! User(JSONObject: json) // It won't crash.
 ```
 
-### custom conversion
-
-The contents in initializer is just plain assignment, so you could do anything to the data. Use `map.rootValue() `  the get the raw JSON value and do what you want.
-
 ### compatible types conversion
 
 |                             | Convert from                                                 |
@@ -127,10 +124,41 @@ The contents in initializer is just plain assignment, so you could do anything t
 
 More detail at [here](https://github.com/leavez/Mappable/blob/master/Sources/Mappable/Mappable%2BBasicType.swift).
 
-### inheritance
+### custom conversion
+
+The content in initializer is just plain assignment, so you could do anything with the data. Use `map.getRootValue()` and `map.getValue(keyPath:)` to the get the raw JSON value and do what you want.
+
+### enum
+
+Enums conforming `RawRepresentable` have a default implementation of `Mappable`. You just need to declare the conforming of `Mappable` to your enum types, then it will work.
+
+For enum with associated values, you could do the manual implementation:
 
 ```swift
-class InheritantModel: BaseModel {
+enum EnumWithValues: Mappable {
+    case a(Int)
+    case b(String)
+    
+    init(map: Mapper) throws {
+        // It could be initialized with a json date like:
+        // {"type": "a", value: 123}
+        let value = try map.getValue("type", as: String.self)
+        switch value {
+        case "a":
+            self = .a(try map.from("value"))
+        case "b":
+            self = .b(try map.from("value"))
+        default:
+            throw ErrorType.JSONStructureNotMatchDesired(value, "string a/b")
+        }
+    }
+}
+```
+
+### class inheritance
+
+```swift
+class ChildModel: BaseModel {
     let b : Int
     required init(map: Mapper) throws {
         b = try map.from("b")
@@ -139,7 +167,7 @@ class InheritantModel: BaseModel {
 }
 ```
 
-### nested
+### nested key path
 
 Use key path "AAA.BBB" to map a multi-level path value in JSON:
 
@@ -152,18 +180,20 @@ b = try map.from("AAA.BBB")
 b = try map.from("AAA.`2`") // b = 33
 ```
 
+If a normal key contains "." naturally, you could use like `map.from("a.file", keyPathIsNested: false)`, to treat the key as a single-level path.
+
 ## Installation
 
-#### Cocoapods
+### Cocoapods
 
 ```ruby
 pod 'Mappable'
 ```
 
-#### Swift Package Manager
+### Swift Package Manager
 
 ```swift
-.Package(url: "https://github.com/leavez/Mappable.git", from: "1.0"),
+.Package(url: "https://github.com/leavez/Mappable.git", from: "1.1"),
 ```
 
 ## License
