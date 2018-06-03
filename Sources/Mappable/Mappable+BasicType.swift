@@ -122,12 +122,12 @@ extension Bool: Mappable {
         case let v as Bool:
             self = v
         case let v as Int:
-            self = v != 0
+            self = (v != 0)
         case let v as String:
             switch v {
-            case "false", "False", "FALSE", "NO":
+            case "false", "False", "FALSE", "NO", "0":
                 self = false
-            case "true", "True", "TRUE", "YES":
+            case "true", "True", "TRUE", "YES", "1":
                 self = true
             default:
                 throw ErrorType.cannotCast(v, "\(Bool.self)")

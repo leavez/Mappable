@@ -120,7 +120,7 @@ The contents in initializer is just plain assignment, so you could do anything t
 |                             | Convert from                                                 |
 | :-------------------------- | ------------------------------------------------------------ |
 | Int, Double, Float, CGFloat | String                                                       |
-| Bool                        | Int,  "true", "True", "TRUE", "YES" ,  "false", "False", "FALSE", "NO" |
+| Bool                        | Int,  "true", "True", "TRUE", "YES", "false", "False", "FALSE", "NO", "0", "1" |
 | String                      | Int, NSNumber, Date( iso8601 )                               |
 | URL                         | String                                                       |
 | Date                        | String (iso8601)                                             |
