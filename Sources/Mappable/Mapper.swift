@@ -12,12 +12,17 @@ import Foundation
 /// value (specified by keypath) to strong typed object automatically.
 ///
 /// The main ability implemented in the extension below. The functions
-/// in the protocol shouldn'd be used directly.
+/// in the protocol shouldn'd be used directly, except for in a custom
+/// conversion.
 ///
 public protocol Mapper {
-    func value(keyPath: String, keyPathIsNested: Bool) -> Any?
-    func rootValue() -> Any
-    func generateAnother(with data: Any) -> Self
+ 
+    // Methods to get raw value of specified key path from JSON
+    func getValue(keyPath: String, keyPathIsNested: Bool) -> Any?
+    func getRootValue() -> Any
+    
+    // Method to create a mapper with data
+    func createMapper(with data: Any) -> Self
 }
 
 
@@ -32,8 +37,8 @@ extension Mapper {
     ///               get the nth value in a array. "AAA.`0`" means `dict['AAA'][0]`.
     ///
     public func from<T>(_ keyPath: String, keyPathIsNested: Bool = true) throws -> T {
-        guard let value = self.value(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
-            throw ErrorType.valueNonExisted
+        guard let value = getValue(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
+            throw ErrorType.valueNonExisted(keyPath)
         }
         if let v = value as? T {
             return v
@@ -42,11 +47,35 @@ extension Mapper {
     }
 
     public func from<T: Mappable>(_ keyPath: String, keyPathIsNested: Bool = true) throws -> T {
-        guard let value = self.value(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
-            throw ErrorType.valueNonExisted
+        guard let value = getValue(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
+            throw ErrorType.valueNonExisted(keyPath)
         }
-        let mapper = self.generateAnother(with: value)
+        let mapper = self.createMapper(with: value)
         return try T.init(map:mapper)
+    }
+    
+    
+}
+
+
+extension Mapper {
+    
+    /// Convenient methods to get the raw JSON value, which may be used in a
+    /// custom conversion.
+    ///
+    public func getValue(_ keyPath: String, keyPathIsNested: Bool = true) -> Any? {
+        return getValue(keyPath: keyPath, keyPathIsNested: keyPathIsNested)
+    }
+    
+    public func getValue<T>(_ keyPath: String, keyPathIsNested: Bool = true, as type: T.Type) throws -> T {
+        let value = getValue(keyPath: keyPath, keyPathIsNested: keyPathIsNested)
+        guard value != nil else {
+            throw ErrorType.valueNonExisted(keyPath)
+        }
+        if let value = value as? T {
+            return value
+        }
+        throw ErrorType.cannotCast(value, "\(T.self)")
     }
 }
 

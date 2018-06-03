@@ -26,15 +26,15 @@ extension JSON: CustomStringConvertible {
 
 extension JSON: Mapper {
 
-    public func generateAnother(with data: Any) -> JSON {
+    public func createMapper(with data: Any) -> JSON {
         return JSON(data)
     }
 
-    public func rootValue() -> Any {
+    public func getRootValue() -> Any {
         return value
     }
 
-    public func value(keyPath: String, keyPathIsNested: Bool) -> Any? {
+    public func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
 
         let delimiter: Character = "."
 

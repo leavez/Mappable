@@ -24,7 +24,7 @@ extension Mappable where Self: FixedWidthInteger {
 
     public init(map: Mapper) throws {
 
-        switch map.rootValue() {
+        switch map.getRootValue() {
         case let v as Self:
             self = v
         case let v as NSNumber:
@@ -41,7 +41,7 @@ extension Mappable where Self: FixedWidthInteger {
                 throw ErrorType.cannotCast(v, "\(Self.self)")
             }
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(Self.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(Self.self)")
         }
     }
 
@@ -53,7 +53,7 @@ extension Mappable where Self: FixedWidthInteger {
 extension Double: Mappable {
 
     public init(map: Mapper) throws {
-        switch map.rootValue() {
+        switch map.getRootValue() {
         case let v as Double:
             self = v
         case let v as NSNumber:
@@ -65,7 +65,7 @@ extension Double: Mappable {
                 throw ErrorType.cannotCast(v, "\(Double.self)")
             }
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(Double.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(Double.self)")
         }
     }
 }
@@ -73,7 +73,7 @@ extension Double: Mappable {
 extension Float: Mappable {
 
     public init(map: Mapper) throws {
-        switch map.rootValue() {
+        switch map.getRootValue() {
         // Swift 4.1 breaks Float casting from `NSNumber`,
         // so we skip cast directly to Float
         case let v as NSNumber:
@@ -85,7 +85,7 @@ extension Float: Mappable {
                 throw ErrorType.cannotCast(v, "\(Float.self)")
             }
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(Float.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(Float.self)")
         }
     }
 }
@@ -95,7 +95,7 @@ import CoreGraphics
 extension CGFloat: Mappable {
 
     public init(map: Mapper) throws {
-        switch map.rootValue() {
+        switch map.getRootValue() {
         case let v as CGFloat:
             self = v
         case let v as NSNumber:
@@ -107,7 +107,7 @@ extension CGFloat: Mappable {
                 throw ErrorType.cannotCast(v, "\(CGFloat.self)")
             }
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(CGFloat.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(CGFloat.self)")
         }
     }
 }
@@ -118,7 +118,7 @@ extension CGFloat: Mappable {
 extension Bool: Mappable {
 
     public init(map: Mapper) throws {
-        switch map.rootValue() {
+        switch map.getRootValue() {
         case let v as Bool:
             self = v
         case let v as Int:
@@ -133,7 +133,7 @@ extension Bool: Mappable {
                 throw ErrorType.cannotCast(v, "\(Bool.self)")
             }
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(Bool.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(Bool.self)")
         }
     }
 }
@@ -144,7 +144,7 @@ extension Bool: Mappable {
 extension String: Mappable {
 
     public init(map: Mapper) throws {
-        switch map.rootValue() {
+        switch map.getRootValue() {
         case let v as String:
             self = v
         case let v as Int:
@@ -154,7 +154,7 @@ extension String: Mappable {
         case let v as Date:
             self = iso8601DateFormatter.string(from: v)
         default:
-            throw ErrorType.cannotCast(map.rootValue(), "\(String.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(String.self)")
         }
     }
 }
@@ -162,11 +162,11 @@ extension String: Mappable {
 extension URL: Mappable {
 
     public init(map: Mapper) throws {
-        if let v = map.rootValue() as? String,
+        if let v = map.getRootValue() as? String,
             let url = URL(string: v) {
             self = url
         } else {
-            throw ErrorType.cannotCast(map.rootValue(), "\(URL.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(URL.self)")
         }
     }
 }
@@ -174,11 +174,11 @@ extension URL: Mappable {
 extension Date: Mappable {
 
     public init(map: Mapper) throws {
-        if let v = map.rootValue() as? String,
+        if let v = map.getRootValue() as? String,
             let date = iso8601DateFormatter.date(from: v) {
             self = date
         } else {
-            throw ErrorType.cannotCast(map.rootValue(), "\(Date.self)")
+            throw ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
         }
     }
 }
