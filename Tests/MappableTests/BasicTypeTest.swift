@@ -63,8 +63,7 @@ class BasicTypesTest: XCTestCase {
             XCTAssertEqual(a.uInt32, 12345)
             XCTAssertEqual(a.uInt64, 1234567891011121314)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
 
         let json2 = """
@@ -88,8 +87,7 @@ class BasicTypesTest: XCTestCase {
             XCTAssertEqual(a.uInt32, 12345)
             XCTAssertEqual(a.uInt64, 1234567891011121314)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
         
     }
@@ -141,8 +139,7 @@ class BasicTypesTest: XCTestCase {
             XCTAssertEqual(a.cgFloat, -12345.123)
             #endif
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
         
         XCTAssertEqual(try? FloatTypesModel(JSONObject: ["double": 1]).double, 1)

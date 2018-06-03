@@ -34,8 +34,7 @@ class SetTests: XCTestCase {
             XCTAssertEqual(["a", "b", "c"], a.primative)
             XCTAssertEqual(Set(a.model.map{ $0.int }), Set([123, 456]))
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 

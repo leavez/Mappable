@@ -57,8 +57,7 @@ class OmniTests: XCTestCase {
             XCTAssertEqual(a.optionalArray[0]?.optionalArray, [nil])
             XCTAssertEqual(a.dict["1"], a.optional)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 }

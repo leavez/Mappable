@@ -62,8 +62,7 @@ class EnumTests: XCTestCase {
             XCTAssertEqual(a.array[1], EnumModel.B)
             XCTAssertEqual(a.array[2], EnumModel.C)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
     

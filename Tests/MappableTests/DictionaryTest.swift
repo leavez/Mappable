@@ -35,8 +35,7 @@ class DictionaryTests: XCTestCase {
             XCTAssertEqual(a.model["1"]?.int, 123)
             XCTAssertEqual(a.model["2"]?.int, 456)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 

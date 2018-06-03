@@ -31,8 +31,7 @@ class InheritanceTests: XCTestCase {
             XCTAssertEqual(a.int, 123)
             XCTAssertEqual(a.b, 456)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 }

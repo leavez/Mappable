@@ -41,8 +41,7 @@ class OptionalTests: XCTestCase {
             XCTAssertEqual(a.model?.int, 123)
             XCTAssertTrue(a.model2 == nil)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 }

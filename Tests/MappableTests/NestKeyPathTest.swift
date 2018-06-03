@@ -50,8 +50,7 @@ class NestedKeyPathTests: XCTestCase {
             XCTAssertEqual(a.enu2, EnumModel.A)
             XCTAssertEqual(a.enu3, EnumModel.C)
         } catch let e {
-            print(e)
-            XCTAssertTrue(false)
+            XCTFail(e.localizedDescription)
         }
     }
 }
