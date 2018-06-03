@@ -67,8 +67,8 @@ class Country: Mappable {
     let atContinent: Continent // enum Continent: Mappable { ... }
     
     required init(map: Mapper) throws {
-        number      = try map.from("flight_number")
-        time        = try map.from("time")
+        name        = try map.from("name")
+        cities      = try map.from("city")
         atContinent = try map.from("location.continent")
     }
 }
@@ -80,7 +80,7 @@ Then you could initialize a object like this:
 
 ```swift
 // NOTE: these initializer throw errors, you should do error handling
-let c = try Country(JSON: jsonDict) 
+let c = try Country(JSON: jsonDict)
 let d = try? Country(JSONString: jsonString)
 ```
 
@@ -180,7 +180,7 @@ b = try map.from("AAA.BBB")
 b = try map.from("AAA.`2`") // b = 33
 ```
 
-If a normal key contains "." naturally, you could use like `map.from("a.file", keyPathIsNested: false)`, to treat the key as a single-level path.
+If a normal key contains `.` naturally, you could use like `map.from("a.file", keyPathIsNested: false)`, to treat the key as a single-level path.
 
 ## Installation
 
