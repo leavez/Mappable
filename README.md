@@ -2,6 +2,8 @@
 
 [![Swift](https://img.shields.io/badge/swift-4.1-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
 [![Build Status](https://travis-ci.org/leavez/Mappable.svg?branch=master)](https://travis-ci.org/leavez/Mappable)
+[![Codecov branch](https://img.shields.io/codecov/c/github/leavez/Mappable/master.svg?style=flat)](https://codecov.io/gh/leavez/Mappable)
+
 
 Mappable is a lightweight, easy-to-use framework to convert JSON to model, specially optimized for immutable property initialization.
 
