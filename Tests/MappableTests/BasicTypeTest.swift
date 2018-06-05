@@ -89,7 +89,8 @@ class BasicTypesTest: XCTestCase {
         } catch let e {
             XCTFail(e.localizedDescription)
         }
-        
+        XCTAssertEqual(try? Int(JSONString: "1.1") , 1)
+
     }
     
 

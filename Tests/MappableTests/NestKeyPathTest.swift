@@ -23,6 +23,14 @@ struct NestedKeyPathModel: Mappable {
     }
 }
 
+struct NestedKeyPath2Model: Mappable {
+    let enu: EnumModel
+
+    init(map: Mapper) throws {
+        enu = try map.from("values.AA.`-`")
+    }
+}
+
 class NestedKeyPathTests: XCTestCase {
 
     func test() {
@@ -52,5 +60,32 @@ class NestedKeyPathTests: XCTestCase {
         } catch let e {
             XCTFail(e.localizedDescription)
         }
+
+        let json2 = """
+{
+    "values.AA": 2,
+    "values": {
+        "AA": []
+    },
+    "AA": [
+       {
+         "BB": [
+            {"CC": 0}
+          ]
+       }
+    ]
+}
+"""
+        XCTAssertThrowsError(try NestedKeyPathModel(JSONString: json2))
+
+        let json3 = """
+{
+    "values": {
+        "AA": [0,1,2]
+    },
+}
+"""
+        XCTAssertThrowsError(try NestedKeyPath2Model(JSONString: json3))
+
     }
 }
