@@ -196,7 +196,7 @@ pod 'Mappable'
 ### Swift Package Manager
 
 ```swift
-.Package(url: "https://github.com/leavez/Mappable.git", from: "1.1"),
+.Package(url: "https://github.com/leavez/Mappable.git", from: "1.1.1"),
 ```
 
 ## License
