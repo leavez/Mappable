@@ -48,13 +48,17 @@ extension Mapper {
 
     public func from<T: Mappable>(_ keyPath: String, keyPathIsNested: Bool = true) throws -> T {
         guard let value = getValue(keyPath: keyPath, keyPathIsNested: keyPathIsNested) else {
+            // special case for Optional
+            if let nullableType = T.self as? Nullable.Type {
+                return nullableType.nilValue() as! T
+            }
             throw ErrorType.valueNonExisted(keyPath)
         }
         let mapper = self.createMapper(with: value)
         return try T.init(map:mapper)
     }
-    
-    
+
+
 }
 
 

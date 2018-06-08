@@ -71,3 +71,12 @@ extension Optional: Mappable {
         }
     }
 }
+
+protocol Nullable {
+    static func nilValue() -> Self
+}
+extension Optional: Nullable {
+    static func nilValue() -> Optional<Wrapped> {
+        return nil
+    }
+}

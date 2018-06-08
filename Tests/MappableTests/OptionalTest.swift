@@ -22,14 +22,21 @@ class OptionalIntModel: Mappable {
     }
 }
 
+class OptionalInt2Model: Mappable {
+    let int: Int?
+
+    required init(map: Mapper) throws {
+        int = try map.from("int")
+    }
+}
+
 class OptionalTests: XCTestCase {
 
     func test() {
         let json = """
 {
         "int": 1,
-        "int2": {},
-        "int3": null,
+        "int2": null,
         "model": {"int": 123},
         "model2": "ddddd"
 }
@@ -43,5 +50,12 @@ class OptionalTests: XCTestCase {
         } catch let e {
             XCTFail(e.localizedDescription)
         }
+
+        XCTAssertEqual(try! OptionalInt2Model(JSONObject: [:]).int, nil)
+        XCTAssertEqual(try! OptionalInt2Model(JSONObject: ["int": {}]).int, nil)
+        XCTAssertEqual(try! OptionalInt2Model(JSONObject: ["int": []]).int, nil)
+        XCTAssertEqual(try! OptionalInt2Model(JSONObject: ["int": 1]).int, 1)
+        XCTAssertEqual(try! OptionalInt2Model(JSONObject: ["int": "123"]).int, 123)
+
     }
 }
