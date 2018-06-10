@@ -151,8 +151,6 @@ extension String: Mappable {
             self = String(format: "%ld", v)
         case let v as NSNumber:
             self = String(format: "%@", v)
-        case let v as Date:
-            self = iso8601DateFormatter.string(from: v)
         default:
             throw ErrorType.cannotCast(map.getRootValue(), "\(String.self)")
         }
@@ -172,18 +170,24 @@ extension URL: Mappable {
 }
 
 extension Date: Mappable {
-
+    
     public init(map: Mapper) throws {
-        if let v = map.getRootValue() as? String,
-            let date = iso8601DateFormatter.date(from: v) {
-            self = date
-        } else {
+        switch map.getRootValue() {
+        case let v as NSNumber:
+            self = Date(timeIntervalSince1970: v.doubleValue)
+        case let v as String:
+            if let date = RFC3339DateFormatter.date(from: v) {
+                self = date
+            } else {
+                throw ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
+            }
+        default:()
             throw ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
         }
     }
 }
 
-private let iso8601DateFormatter: DateFormatter = {
+private let RFC3339DateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"

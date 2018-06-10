@@ -121,9 +121,9 @@ let user = try! User(JSONObject: json) // It won't crash.
 | :-------------------------- | ------------------------------------------------------------ |
 | Int, Double, Float, CGFloat | String                                                       |
 | Bool                        | Int,  "true", "True", "TRUE", "YES", "false", "False", "FALSE", "NO", "0", "1" |
-| String                      | Int, NSNumber, Date( iso8601 )                               |
-| URL                         | String                                                       |
-| Date                        | String (iso8601)                                             |
+| String                      | Int, NSNumber  |
+| URL                         | String  |
+| Date                        | Double(secondsSince1970),  String (RFC 3339, e.g. `2016-06-13T16:00:00+00:00`)                                             |
 
 More detail at [here](https://github.com/leavez/Mappable/blob/master/Sources/Mappable/Mappable%2BBasicType.swift).
 

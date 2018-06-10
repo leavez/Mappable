@@ -229,6 +229,8 @@ class BasicTypesTest: XCTestCase {
     
     func testDate() {
         XCTAssertEqual(try? DateModel(JSONObject: ["value": "2018-06-03T13:11:50+08:00"]).value, Date(timeIntervalSince1970: 1528002710))
+        XCTAssertEqual(try? DateModel(JSONObject: ["value": 1528002710]).value, Date(timeIntervalSince1970: 1528002710))
+        XCTAssertEqual(try? DateModel(JSONObject: ["value": 1528002710.123456]).value, Date(timeIntervalSince1970: 1528002710.123456))
         XCTAssertThrowsError(try DateModel(JSONObject: ["value": "123123123"]))
     }
 
