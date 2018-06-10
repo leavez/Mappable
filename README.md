@@ -95,6 +95,13 @@ let d = try? Country(JSONString: jsonString)
 - Enum, Struct, Object
 - Any combination of the types above
 
+### default value
+
+```swift
+// just use `??`
+cities = try map.from("city") ?? []
+```
+
 ### optional handling
 
 `Optional` types won't throw an error even if there's no corresponding date in JSON or the date is in mal-format. A `nil` will be assigned in this situation. 
