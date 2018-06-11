@@ -13,9 +13,7 @@ class IntModel: Mappable, Hashable {
     required init(map: Mapper) throws {
         int = try map.from("int")
     }
-    init(_ int: Int) {
-        self.int = int
-    }
+
     var hashValue: Int {
         return int
     }
