@@ -8,7 +8,7 @@
 import Foundation
 
 /// a JSON implementation of Mapper
-public struct JSON {
+struct JSON {
 
     private let value: Any
 
@@ -19,22 +19,22 @@ public struct JSON {
 
 extension JSON: CustomStringConvertible {
 
-    public var description: String {
+    var description: String {
         return "JSON: \(value)"
     }
 }
 
 extension JSON: Mapper {
 
-    public func createMapper(with data: Any) -> JSON {
+    func createMapper(with data: Any) -> JSON {
         return JSON(data)
     }
 
-    public func getRootValue() -> Any {
+    func getRootValue() -> Any {
         return value
     }
 
-    public func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
+    func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
 
         let delimiter: Character = "."
 
