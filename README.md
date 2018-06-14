@@ -206,6 +206,12 @@ pod 'Mappable'
 .Package(url: "https://github.com/leavez/Mappable.git", from: "1.2.1"),
 ```
 
+### Carthage
+
+```ruby
+github "leavez/Mappable"
+```
+
 ## License
 
 Mappable is available under the MIT license. See the LICENSE file for more info.
