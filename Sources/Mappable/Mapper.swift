@@ -25,6 +25,19 @@ public protocol Mapper {
     func createMapper(with data: Any) -> Self
 }
 
+public struct MapperOptions {
+
+    public enum DateDecodingStrategy {
+        // Use secondsSince1970 for number data and iso8601 for string data
+        case automatic
+        case secondsSince1970
+        case millisecondsSince1970
+        case iso8601InRFC3339Format
+        case formatted(DateFormatter)
+    }
+
+    public var dateDecodingStrategy: DateDecodingStrategy = .automatic
+}
 
 extension Mapper {
 

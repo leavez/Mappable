@@ -14,7 +14,7 @@ class MiscTests: XCTestCase {
 
     func test_JSON_description() {
         let json = ["a": 1]
-        _ = JSON(json).description
+        _ = JSONMapper(JSON: json).description
     }
     
 
@@ -36,8 +36,8 @@ class MiscTests: XCTestCase {
 
     func test_getRawValue() {
         let json: [String: Any] = ["a": ["1","2","3"]]
-        XCTAssertEqual(JSON(json).getRootValue() as? [String:[String]], ["a": ["1","2","3"]])
-        XCTAssertEqual(JSON(json).getValue("a") as? [String], ["1","2","3"])
+        XCTAssertEqual(JSONMapper(JSON: json).getRootValue() as? [String:[String]], ["a": ["1","2","3"]])
+        XCTAssertEqual(JSONMapper(JSON: json).getValue("a") as? [String], ["1","2","3"])
     }
 
 

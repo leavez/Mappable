@@ -8,30 +8,33 @@
 import Foundation
 
 /// a JSON implementation of Mapper
-struct JSON {
+struct JSONMapper {
 
-    private let value: Any
+    private let jsonValue: Any
+    internal var options: MapperOptions
 
-    public init(_ JSON: Any) {
-        self.value = JSON
+    init(JSON: Any, options: MapperOptions? = nil) {
+        jsonValue = JSON
+        self.options = options ?? MapperOptions()
     }
 }
 
-extension JSON: CustomStringConvertible {
+extension JSONMapper: CustomStringConvertible {
 
     var description: String {
-        return "JSON: \(value)"
+        return "JSON: \(jsonValue)"
     }
 }
 
-extension JSON: Mapper {
+extension JSONMapper: Mapper {
+    
 
-    func createMapper(with data: Any) -> JSON {
-        return JSON(data)
+    func createMapper(with data: Any) -> JSONMapper {
+        return JSONMapper(JSON: data, options: options)
     }
 
     func getRootValue() -> Any {
-        return value
+        return jsonValue
     }
 
     func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
@@ -39,12 +42,12 @@ extension JSON: Mapper {
         let delimiter: Character = "."
 
         if !keyPathIsNested || !keyPath.contains(delimiter) {
-            let dict = value as? [String: Any]
+            let dict = jsonValue as? [String: Any]
             return dict?[keyPath]
         }
 
         var pathes = ArraySlice(keyPath.split(separator: delimiter))
-        var currentValue: Any? = value
+        var currentValue: Any? = jsonValue
 
         while let _key = pathes.popFirst() {
             let key = String(_key)
