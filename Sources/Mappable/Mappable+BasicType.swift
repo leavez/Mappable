@@ -172,17 +172,48 @@ extension URL: Mappable {
 extension Date: Mappable {
     
     public init(map: Mapper) throws {
-        switch map.getRootValue() {
-        case let v as NSNumber:
-            self = Date(timeIntervalSince1970: v.doubleValue)
-        case let v as String:
-            if let date = RFC3339DateFormatter.date(from: v) {
+        
+        func error() -> Error {
+            return ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
+        }
+        
+        let rootValue = map.getRootValue()
+        
+        switch map.options.dateDecodingStrategy {
+        case .automatic:
+            
+            if let v = rootValue as? NSNumber {
+                self = Date(timeIntervalSince1970: v.doubleValue)
+            } else if let v = rootValue as? String, let date = RFC3339DateFormatter.date(from: v) {
                 self = date
             } else {
-                throw ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
+                throw error()
             }
-        default:()
-            throw ErrorType.cannotCast(map.getRootValue(), "\(Date.self)")
+            
+        case .secondsSince1970:
+            if let v = rootValue as? NSNumber {
+                self = Date(timeIntervalSince1970: v.doubleValue)
+            } else {
+                throw error()
+            }
+        case .millisecondsSince1970:
+            if let v = rootValue as? NSNumber {
+                self = Date(timeIntervalSince1970: v.doubleValue/1000.0)
+            } else {
+                throw error()
+            }
+        case .iso8601InRFC3339Format:
+            if let v = rootValue as? String, let date = RFC3339DateFormatter.date(from: v) {
+                self = date
+            } else {
+                throw error()
+            }
+        case .formatted(let dateFormater):
+            if let v = rootValue as? String, let date = dateFormater.date(from: v) {
+                self = date
+            } else {
+                throw error()
+            }
         }
     }
 }
