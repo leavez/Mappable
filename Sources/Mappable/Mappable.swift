@@ -22,7 +22,7 @@ public extension Mappable {
 
     /// Initializes object from a JSONObject
     public init(JSONObject: [String: Any]) throws {
-        let mapper = JSON(JSONObject)
+        let mapper = JSONMapper(JSON: JSONObject)
         try self.init(map: mapper)
     }
 
@@ -38,7 +38,7 @@ public extension Mappable {
     /// Initializes object from a JSON data
     public init(JSONData: Data) throws {
         let json = try JSONSerialization.jsonObject(with: JSONData, options: JSONSerialization.ReadingOptions.allowFragments)
-        let mapper = JSON(json)
+        let mapper = JSONMapper(JSON: json)
         try self.init(map: mapper)
     }
 }

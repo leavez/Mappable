@@ -16,12 +16,17 @@ import Foundation
 /// conversion.
 ///
 public protocol Mapper {
+    
  
     // Methods to get raw value of specified key path from JSON
     func getValue(keyPath: String, keyPathIsNested: Bool) -> Any?
     func getRootValue() -> Any
     
-    // Method to create a mapper with data
+    // Options to configure mapper's behavior
+    var options: MapperOptions { get }
+    
+    // Method to create a mapper with data. It should inherit the content in
+    // `self.options`
     func createMapper(with data: Any) -> Self
 }
 
