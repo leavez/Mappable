@@ -8,10 +8,10 @@
 import Foundation
 
 /// a JSON implementation of Mapper
-struct JSONMapper {
+final class JSONMapper {
 
     private let jsonValue: Any
-    internal var options: MapperOptions
+    var options: MapperOptions
 
     init(JSON: Any, options: MapperOptions? = nil) {
         jsonValue = JSON

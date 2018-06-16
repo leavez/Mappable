@@ -15,7 +15,7 @@ import Foundation
 /// in the protocol shouldn'd be used directly, except for in a custom
 /// conversion.
 ///
-public protocol Mapper {
+public protocol Mapper: class {
     
  
     // Methods to get raw value of specified key path from JSON
@@ -23,7 +23,7 @@ public protocol Mapper {
     func getRootValue() -> Any
     
     // Options to configure mapper's behavior
-    var options: MapperOptions { get }
+    var options: MapperOptions { set get }
     
     // Method to create a mapper with data. It should inherit the content in
     // `self.options`
