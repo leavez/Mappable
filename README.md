@@ -138,6 +138,8 @@ More detail at [here](https://github.com/leavez/Mappable/blob/master/Sources/Map
 
 The content in initializer is just plain assignment, so you could do anything with the data. Use `map.getRootValue()` and `map.getValue(keyPath:)` to the get the raw JSON value and do what you want.
 
+For convenient date conversion, there's also a `options` property in `Mapper` to set custom date strategy. (More complex example [here](https://github.com/leavez/Mappable/blob/d492956c0a8626b44cd96987353f9c9b467a3f44/Tests/MappableTests/BasicTypeTest.swift#L287))
+
 ### enum
 
 Enums conforming `RawRepresentable` have a default implementation of `Mappable`. You just need to declare the conforming of `Mappable` to your enum types, then it will work.
