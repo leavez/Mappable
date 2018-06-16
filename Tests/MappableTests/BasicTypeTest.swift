@@ -226,12 +226,74 @@ class BasicTypesTest: XCTestCase {
             value = try map.from("value")
         }
     }
+    struct DateModel2: Mappable {
+        let value: Date
+        init(map: Mapper) throws {
+            map.options.dateDecodingStrategy = .millisecondsSince1970
+            value = try map.from("value")
+        }
+    }
+    struct DateModel3: Mappable {
+        let value: Date
+        init(map: Mapper) throws {
+            map.options.dateDecodingStrategy = .iso8601InRFC3339Format
+            value = try map.from("value")
+        }
+    }
+    struct DateModel4: Mappable {
+        let value: Date
+        init(map: Mapper) throws {
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "yyyyMMdd"
+            map.options.dateDecodingStrategy = .formatted(formatter)
+            value = try map.from("value")
+        }
+    }
+    struct DateModelNest: Mappable {
+        let value: Date
+        let nested: DateModel
+        let nested2: DateModel2
+        init(map: Mapper) throws {
+            map.options.dateDecodingStrategy = .secondsSince1970
+            value = try map.from("value")
+            nested = try map.from("nested")
+            nested2 = try map.from("nested2")
+        }
+    }
     
     func testDate() {
         XCTAssertEqual(try? DateModel(JSONObject: ["value": "2018-06-03T13:11:50+08:00"]).value, Date(timeIntervalSince1970: 1528002710))
         XCTAssertEqual(try? DateModel(JSONObject: ["value": 1528002710]).value, Date(timeIntervalSince1970: 1528002710))
         XCTAssertEqual(try? DateModel(JSONObject: ["value": 1528002710.123456]).value, Date(timeIntervalSince1970: 1528002710.123456))
         XCTAssertThrowsError(try DateModel(JSONObject: ["value": "123123123"]))
+    }
+    
+    func testDateStrategy() {
+        XCTAssertEqual(try? DateModel2(JSONObject: ["value": 1528002710123.456]).value, Date(timeIntervalSince1970: 1528002710.123456))
+        XCTAssertThrowsError(try DateModel2(JSONObject: ["value": "2018-06-03T13:11:50+08:00"]))
+
+        XCTAssertEqual(try? DateModel3(JSONObject: ["value": "2018-06-03T13:11:50+08:00"]).value, Date(timeIntervalSince1970: 1528002710))
+        XCTAssertThrowsError(try DateModel3(JSONObject: ["value": 1528002710.123456]))
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let date = formatter.date(from: "20180615")
+        XCTAssertEqual(try? DateModel4(JSONObject: ["value": "20180615"]).value, date)
+        XCTAssertThrowsError(try DateModel4(JSONObject: ["value": 1528002710.123456]))
+        XCTAssertThrowsError(try DateModel4(JSONObject: ["value": "2018-06-03T13:11:50+08:00"]))
+    }
+    
+    func testDateStrategyInheritance() {
+        let json: [String : Any] = [
+            "value": 1528002710.123456,
+            "nested": [ "value": 1528002710.123456, ],
+            "nested2": [ "value": 1528002710123.456, ],
+            ]
+        let nest = try? DateModelNest(JSONObject:json)
+        XCTAssertEqual(nest?.value, Date(timeIntervalSince1970: 1528002710.123456))
+        XCTAssertEqual(nest?.nested.value, Date(timeIntervalSince1970: 1528002710.123456))
+        XCTAssertEqual(nest?.nested2.value, Date(timeIntervalSince1970: 1528002710.123456))
     }
 
 }
