@@ -20,12 +20,14 @@ struct Flight: Mappable {
 // Flight(JSONString: json)
 ```
 
+A [xcode plugin](https://github.com/leavez/Mappable_xcode_plugin) is also provided to genereate implementation automatically.
+
 ## Features
 
 - JSON to object by just specifying mapping relationships
 - Optimized for immutable and optional
 - Compatible types conversion : e.g. a Int property could be initialized with String value 
-- Nested key path support
+- Key path support
 
 ## Why Another?
 
