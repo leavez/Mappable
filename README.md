@@ -15,6 +15,9 @@ struct Flight: Mappable {
     init(map: Mapper) throws {
         number = try map.from("id")
         time   = try map.from("time")
+        // or using the new @dynamicMemberLookup feature. It's unavailable in swift 4.1. The code is in `dynamicMemberLookup` branch.
+        // number = try map.id()
+        // time   = try map.time()
     }
 }
 // Flight(JSONString: json)
