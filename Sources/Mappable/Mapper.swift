@@ -15,7 +15,9 @@ import Foundation
 /// in the protocol shouldn'd be used directly, except for in a custom
 /// conversion.
 ///
+#if swift(>=4.2)
 @dynamicMemberLookup
+#endif
 public protocol Mapper: class {
     
  
@@ -103,6 +105,7 @@ extension Mapper {
 }
 
 
+#if swift(>=4.2)
 extension Mapper {
     
     subscript<T>(dynamicMember member: String) -> () throws -> T {
@@ -111,7 +114,9 @@ extension Mapper {
     subscript<T: Mappable>(dynamicMember member: String) -> () throws -> T {
         return { try self.from(member) }
     }
+    
 }
+#endif
 
 
 
