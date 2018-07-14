@@ -15,6 +15,9 @@ struct Flight: Mappable {
     init(map: Mapper) throws {
         number = try map.from("id")
         time   = try map.from("time")
+        // or using the new @dynamicMemberLookup feature
+        // number = try map.id()
+        // time   = try map.time()
     }
 }
 // Flight(JSONString: json)
