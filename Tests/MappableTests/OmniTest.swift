@@ -33,7 +33,6 @@ class OmniModel: Mappable, Equatable {
     }
 }
 
-#if swift(>=4.2)
 class OmniModel2: Mappable, Equatable {
     let direct: NSString
     let optional: OmniModel2?
@@ -56,7 +55,6 @@ class OmniModel2: Mappable, Equatable {
             lhs.dict == rhs.dict
     }
 }
-#endif
 
 class OmniTests: XCTestCase {
 
@@ -90,7 +88,6 @@ class OmniTests: XCTestCase {
         }
     }
     
-    #if swift(>=4.2)
     func testDynamicMemberLookUpAPI() {
         do {
             let a = try OmniModel2(JSONObject: outerJson)
@@ -103,5 +100,4 @@ class OmniTests: XCTestCase {
             XCTFail(e.localizedDescription)
         }
     }
-    #endif
 }
