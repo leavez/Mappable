@@ -105,10 +105,10 @@ extension Mapper {
 
 extension Mapper {
     
-    subscript<T>(dynamicMember member: String) -> () throws -> T {
+    public subscript<T>(dynamicMember member: String) -> () throws -> T {
         return { try self.from(member) }
     }
-    subscript<T: Mappable>(dynamicMember member: String) -> () throws -> T {
+    public subscript<T: Mappable>(dynamicMember member: String) -> () throws -> T {
         return { try self.from(member) }
     }
 }
