@@ -15,6 +15,7 @@ import Foundation
 /// in the protocol shouldn'd be used directly, except for in a custom
 /// conversion.
 ///
+@dynamicMemberLookup
 public protocol Mapper: class {
     
  
@@ -98,6 +99,17 @@ extension Mapper {
             return value
         }
         throw ErrorType.cannotCast(value, "\(T.self)")
+    }
+}
+
+
+extension Mapper {
+    
+    subscript<T>(dynamicMember member: String) -> () throws -> T {
+        return { try self.from(member) }
+    }
+    subscript<T: Mappable>(dynamicMember member: String) -> () throws -> T {
+        return { try self.from(member) }
     }
 }
 

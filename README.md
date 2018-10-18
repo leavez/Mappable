@@ -15,7 +15,7 @@ struct Flight: Mappable {
     init(map: Mapper) throws {
         number = try map.from("id")
         time   = try map.from("time")
-        // or using the new @dynamicMemberLookup feature. It's unavailable in swift 4.1. The code is in `dynamicMemberLookup` branch.
+        // or using the new @dynamicMemberLookup feature
         // number = try map.id()
         // time   = try map.time()
     }
@@ -200,6 +200,9 @@ b = try map.from("AAA.`2`") // b = 33
 If a normal key contains `.` naturally, you could use like `map.from("a.file", keyPathIsNested: false)`, to treat the key as a single-level path.
 
 ## Installation
+
+for swift 4.2 and above : v1.3
+for swift 4.1 and below : v1.2.2
 
 ### Cocoapods
 
