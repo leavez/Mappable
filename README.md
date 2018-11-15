@@ -13,11 +13,14 @@ struct Flight: Mappable {
     let time: Date
     
     init(map: Mapper) throws {
-        number = try map.from("id")
-        time   = try map.from("time")
-        // or using the new @dynamicMemberLookup feature
-        // number = try map.id()
-        // time   = try map.time()
+
+        // with the help of @dynamicMemberLookup feature
+        number = try map.id()
+        time   = try map.time()
+
+        // or use the old way
+        // number = try map.from("id")
+        // time   = try map.from("time")
     }
 }
 // Flight(JSONString: json)
