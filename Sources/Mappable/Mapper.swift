@@ -100,6 +100,16 @@ extension Mapper {
         }
         throw ErrorType.cannotCast(value, "\(T.self)")
     }
+    
+    /// Convenient method to create a mapper with the data of keypath.
+    ///
+    public func subMapper(keyPath: String, keyPathIsNested: Bool = true) -> Self? {
+        if let value = getValue(keyPath, keyPathIsNested: keyPathIsNested) {
+            return self.createMapper(with: value)
+        } else {
+            return nil
+        }
+    }
 }
 
 
