@@ -1,11 +1,11 @@
 # Mappable
 
-[![Swift](https://img.shields.io/badge/swift-4.1-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
+[![Swift](https://img.shields.io/badge/swift-4.2-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
 [![Build Status](https://travis-ci.org/leavez/Mappable.svg?branch=master)](https://travis-ci.org/leavez/Mappable)
 [![Codecov branch](https://img.shields.io/codecov/c/github/leavez/Mappable/master.svg?style=flat)](https://codecov.io/gh/leavez/Mappable)
 
 
-Mappable is a lightweight, easy-to-use framework to convert JSON to model, specially optimized for immutable property initialization.
+Mappable is a lightweight, flexible, easy-to-use framework to convert JSON to model, specially optimized for immutable property initialization.
 
 ```swift
 struct Flight: Mappable {
@@ -32,6 +32,7 @@ A [xcode plugin](https://github.com/leavez/Mappable_xcode_plugin) is also provid
 
 - JSON to object by just specifying mapping relationships
 - Optimized for immutable and optional
+- Flexible: easy to mix with manual initailization
 - Compatible types conversion : e.g. a Int property could be initialized with String value 
 - Key path support
 
@@ -204,8 +205,8 @@ If a normal key contains `.` naturally, you could use like `map.from("a.file", k
 
 ## Installation
 
-for swift 4.2 and above : v1.3
-for swift 4.1 and below : v1.2.2
+- for swift 4.2 and above : v1.3
+- for swift 4.1 and below : v1.2.2
 
 ### Cocoapods
 
@@ -216,7 +217,7 @@ pod 'Mappable'
 ### Swift Package Manager
 
 ```swift
-.Package(url: "https://github.com/leavez/Mappable.git", from: "1.2.1"),
+.Package(url: "https://github.com/leavez/Mappable.git", from: "1.4.0"),
 ```
 
 ### Carthage
