@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Mappable'
-    s.version          = '1.3.1'
+    s.version          = '1.4.0'
     s.summary          = 'JSON Object mapping, supporting `let` properties.'
 
     s.description      = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'https://github.com/leavez/Mappable.git', :tag => s.version.to_s }
 
     s.source_files = 'Sources/**/*.swift'
-    s.swift_version = "4.0"
+    s.swift_version = "4.2"
     s.ios.deployment_target = '8.0'
     s.osx.deployment_target = '10.10'
 
