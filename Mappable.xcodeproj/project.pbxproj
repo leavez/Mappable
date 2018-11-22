@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4109D7D221A6939800EB6C5F /* MapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4109D7D121A6939800EB6C5F /* MapperTests.swift */; };
 		OBJ_38 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* JSON.swift */; };
 		OBJ_39 /* Mappable+BasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Mappable+BasicType.swift */; };
 		OBJ_40 /* Mappable+ContainerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Mappable+ContainerType.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4109D7D121A6939800EB6C5F /* MapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperTests.swift; sourceTree = "<group>"; };
 		"Mappable::Mappable::Product" /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mappable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Mappable::MappableTests::Product" /* MappableTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MappableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Mappable+BasicType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mappable+BasicType.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				4109D7CF21A6927E00EB6C5F /* CollectionTypesTest */,
 				4109D7D021A692EC00EB6C5F /* OmniTest */,
 				OBJ_25 /* MiscTest.swift */,
+				4109D7D121A6939800EB6C5F /* MapperTests.swift */,
 			);
 			name = MappableTests;
 			path = Tests/MappableTests;
@@ -316,6 +319,7 @@
 				OBJ_70 /* NestKeyPathTest.swift in Sources */,
 				OBJ_71 /* OmniTest.swift in Sources */,
 				OBJ_72 /* OptionalTest.swift in Sources */,
+				4109D7D221A6939800EB6C5F /* MapperTests.swift in Sources */,
 				OBJ_73 /* SetTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
