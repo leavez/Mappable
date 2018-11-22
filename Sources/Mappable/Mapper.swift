@@ -105,6 +105,13 @@ extension Mapper {
 
 extension Mapper {
     
+    /// With the help of @dynamicMemberLookup, mapper API could be simplified:
+    ///
+    ///     // old
+    ///     time = try map.from("time")
+    ///     // new
+    ///     time = try map.time()
+    ///
     public subscript<T>(dynamicMember member: String) -> () throws -> T {
         return { try self.from(member) }
     }
