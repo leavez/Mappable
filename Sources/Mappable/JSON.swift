@@ -8,10 +8,10 @@
 import Foundation
 
 /// a JSON implementation of Mapper
-final class JSONMapper {
+public final class JSONMapper {
 
     private let jsonValue: Any
-    var options: MapperOptions
+    public var options: MapperOptions
 
     init(JSON: Any, options: MapperOptions? = nil) {
         jsonValue = JSON
@@ -21,23 +21,23 @@ final class JSONMapper {
 
 extension JSONMapper: CustomStringConvertible {
 
-    var description: String {
-        return "JSON: \(jsonValue)"
+    public var description: String {
+        return "JSONMapper:\n \(jsonValue)"
     }
 }
 
 extension JSONMapper: Mapper {
     
 
-    func createMapper(with data: Any) -> JSONMapper {
+    public func createMapper(with data: Any) -> JSONMapper {
         return JSONMapper(JSON: data, options: options)
     }
 
-    func getRootValue() -> Any {
+    public func getRootValue() -> Any {
         return jsonValue
     }
 
-    func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
+    public func getValue(keyPath: String, keyPathIsNested: Bool) -> Any? {
 
         let delimiter: Character = "."
 
