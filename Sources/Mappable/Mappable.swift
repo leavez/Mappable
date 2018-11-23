@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// 
-///
+/// This is the protocol the models should be conformed with.
 ///
 public protocol Mappable {
     init(map: Mapper) throws
@@ -20,7 +19,14 @@ public protocol Mappable {
 /// Conveint initializers for JSON
 public extension Mappable {
 
-    /// Initializes object from a JSONObject
+    /// Initializes object from a JSON object
+    ///
+    /// A JSON object could be Dictionary, Array or plain String/Number value. It could
+    /// be the result of JSONSerialization(jsonObject:options:).
+    public init(JSONObject: Any) throws {
+        let mapper = JSONMapper(JSON: JSONObject)
+        try self.init(map: mapper)
+    }
     public init(JSONObject: [String: Any]) throws {
         let mapper = JSONMapper(JSON: JSONObject)
         try self.init(map: mapper)
