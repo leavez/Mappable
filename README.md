@@ -205,7 +205,7 @@ If a normal key contains `.` naturally, you could use like `map.from("a.file", k
 
 ## Installation
 
-- for swift 4.2 and above : v1.3
+- for swift 4.2 and above : v1.3+
 - for swift 4.1 and below : v1.2.2
 
 ### Cocoapods
@@ -217,7 +217,7 @@ pod 'Mappable'
 ### Swift Package Manager
 
 ```swift
-.Package(url: "https://github.com/leavez/Mappable.git", from: "1.4.0"),
+.Package(url: "https://github.com/leavez/Mappable.git", from: "1.4.1"),
 ```
 
 ### Carthage

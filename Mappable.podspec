@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Mappable'
-    s.version          = '1.4.0'
+    s.version          = '1.4.1'
     s.summary          = 'JSON Object mapping, supporting `let` properties.'
 
     s.description      = <<-DESC
