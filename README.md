@@ -40,31 +40,18 @@ A [xcode plugin](https://github.com/leavez/Mappable_xcode_plugin) is also provid
 
 Most JSON to model libraries cannot handle immutable property initialization well. They require to declare properties with `var` and nullable types, which break the sprint of Swift and lead to bad code. Mappable was born for solving this problem.
 
-### compared with others
 
-#### Codable
+|              | Pros          | Cons                                                                                                                                                                                                                                         |
+|--------------|---------------|---------------|
+| Codable      | - Native in Swift<br>- Automatic (no mapping relationships)<br>- support 2-direction conversion | -  Inflexible<br>- Doesn't support inherented class                                                                                                                                                                                               |
+| HandyJSON    | - Automatic (no mapping relationships)<br>- 2-direction conversion   | No immutable properties support                                                                                                                                                                               |
+| ObjectMapper |  2-direction conversion  | - Immutable properties support is weak* <br>- Multiple partterns led to chaos <br>- Missing support for some combinations of types.|
+| SwiftyJSON   |    | Not a JSON object convertor.<br> It's only a convenient tool to deal with JSON data.                                                                                                                                                              |
 
-pros: Codable is native in Swift, need no mapping relationships, and spport 2-direction conversion. (support immutable too)
-
-cons: Doesn't support inherent class.
-
-#### HandyJSON
-
-pros: HandyJSON needs no mapping relationships, and support 2-direction conversion (JSON to model, model to JSON).
-
-cons: Doesn't support immutable properties.
-
-#### ObjectMapper
+\* 1) Cannot handle optional conveniently. 2) Doesn't support of compatible types conversion, which fall the whole object for every small mal-format in JSON. 
 
 Mappable is highly inspired by ObjectMapper. You could tread Mappable as an improved version of `ImmutableMappable` in ObjectMapper.
 
-pros:  2-direction conversion
-
-cons: Doesn't support immutable very well: 1) cannot handle optional conveniently. 2)  doesn't support of compatible types conversion, which fall the whole object for every small mal-format in JSON. Also missing support for some combinations of types.
-
-#### SwiftyJSON
-
-SwiftyJSON is not a JSON object convertor. It's only a convenient tool to deal with JSON data.
 
 ## Usage
 
