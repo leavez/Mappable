@@ -13,10 +13,11 @@ class IntModel: Mappable, Hashable {
     required init(map: Mapper) throws {
         int = try map.from("int")
     }
-
-    var hashValue: Int {
-        return int
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(int)
     }
+
     static func ==(lhs: IntModel, rhs:IntModel) -> Bool {
         return lhs.int == rhs.int
     }
