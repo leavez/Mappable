@@ -1,6 +1,6 @@
 # Mappable
 
-[![Swift](https://img.shields.io/badge/swift-4.2-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
+[![Swift](https://img.shields.io/badge/swift-5-orange.svg?style=flat)](#) [![Swift Package Manager](https://rawgit.com/jlyonsmith/artwork/master/SwiftPackageManager/swiftpackagemanager-compatible.svg)](https://swift.org/package-manager/)
 [![Build Status](https://travis-ci.org/leavez/Mappable.svg?branch=master)](https://travis-ci.org/leavez/Mappable)
 [![Codecov branch](https://img.shields.io/codecov/c/github/leavez/Mappable/master.svg?style=flat)](https://codecov.io/gh/leavez/Mappable)
 
@@ -55,7 +55,7 @@ Mappable is highly inspired by ObjectMapper. You could tread Mappable as an impr
 
 ## Usage
 
-### the basics
+### The basics
 
 To support mapping, a type should implement `Mappable` protocol, which have only an initializer method:
 
@@ -83,7 +83,7 @@ let c = try Country(JSON: jsonDict)
 let d = try? Country(JSONString: jsonString)
 ```
 
-### support types
+### Supported types
 
 - Primitive types: `Int`, `Double`, `String`, `Bool`, `URL`, `Date` ...
 - Container types: `Array`, `Dictionary`, `Set`
@@ -91,14 +91,14 @@ let d = try? Country(JSONString: jsonString)
 - Enum, Struct, Object
 - Any combination of the types above
 
-### default value
+### Default value
 
 ```swift
 // just use `??`
 cities = try map.from("city") ?? []
 ```
 
-### optional handling
+### Optional handling
 
 `Optional` types won't throw an error even if there's no corresponding date in JSON or the date is in mal-format. A `nil` will be assigned in this situation. 
 
@@ -118,7 +118,7 @@ let json = ["id": "a123"]
 let user = try! User(JSONObject: json) // It won't crash.
 ```
 
-### compatible types conversion
+### Compatible types conversion
 
 |                             | Convert from                                                 |
 | :-------------------------- | ------------------------------------------------------------ |
@@ -130,13 +130,13 @@ let user = try! User(JSONObject: json) // It won't crash.
 
 More detail at [here](https://github.com/leavez/Mappable/blob/master/Sources/Mappable/Mappable%2BBasicType.swift).
 
-### custom conversion
+### Custom conversion
 
 The content in initializer is just plain assignment, so you could do anything with the data. Use `map.getRootValue()` and `map.getValue(keyPath:)` to the get the raw JSON value and do what you want.
 
 For convenient date conversion, there's also a `options` property in `Mapper` to set custom date strategy. (More complex example [here](https://github.com/leavez/Mappable/blob/d492956c0a8626b44cd96987353f9c9b467a3f44/Tests/MappableTests/BasicTypeTest.swift#L287))
 
-### enum
+### Enum
 
 Enums conforming `RawRepresentable` have a default implementation of `Mappable`. You just need to declare the conforming of `Mappable` to your enum types, then it will work.
 
@@ -163,7 +163,7 @@ enum EnumWithValues: Mappable {
 }
 ```
 
-### class inheritance
+### Class inheritance
 
 ```swift
 class ChildModel: BaseModel {
@@ -175,7 +175,7 @@ class ChildModel: BaseModel {
 }
 ```
 
-### nested key path
+### Nested key path
 
 Use key path "AAA.BBB" to map a multi-level path value in JSON:
 
@@ -192,8 +192,8 @@ If a normal key contains `.` naturally, you could use like `map.from("a.file", k
 
 ## Installation
 
-- for swift 4.2 and above : v1.3+
-- for swift 4.1 and below : v1.2.2
+- for Swift 5 & 4.2   : v1.3+
+- for Swift 4.1 and below : v1.2.2
 
 ### Cocoapods
 
@@ -204,7 +204,7 @@ pod 'Mappable'
 ### Swift Package Manager
 
 ```swift
-.Package(url: "https://github.com/leavez/Mappable.git", from: "1.4.1"),
+.Package(url: "https://github.com/leavez/Mappable.git", from: "1.5.0"),
 ```
 
 ### Carthage
